@@ -37,14 +37,10 @@ On Linux run <code>chmod +x ~/path/fileshare</code> to give it execution permiss
 3. Compile the program using below commands.
 
 Linux:\
-<code>
-g++ -std=c++17 -Iasioinclude -o fileshare fileshare.cpp -lpthread
-</code>
+<code>g++ -std=c++17 -Iasioinclude -o fileshare fileshare.cpp -lpthread </code>
 
 Windows:\
-<code>
-g++ -D_WIN32_WINNT=0x0601 -Iasioinclude fileshare.cpp -o fileshare -lws2_32 -lpthread
-</code>
+<code>g++ -D_WIN32_WINNT=0x0601 -Iasioinclude fileshare.cpp -o fileshare -lws2_32 -lpthread</code>
 
 
 
