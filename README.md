@@ -1,12 +1,8 @@
 # fileshare
 A command-line tool written in C++ to transer files on a local network without internet access or third-party server.
 
-
-<img src="./screenshots/receive_full.png" alt="fileshare sending" width="48%" />
-<img src="./screenshots/send_full.png" alt="fileshare receiving" width="48%" />
-
-<img src="./screenshots/receive_full.png" alt="Image 1" width="45%" style="display:inline-block;"/>
-<img src="./screenshots/send_full.png" alt="Image 2" width="45%" style="display:inline-block;"/>
+<img src="./screenshots/receive_full.png" alt="fileshare sending" width = "500"/>
+<img src="./screenshots/send_full.png" alt="fileshare receiving" width = "500"/>
 
 ## Features
 - File Transfer : Breaks large files into chunks and transmits them reliably to a peer.
