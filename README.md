@@ -24,10 +24,10 @@ You can either build the executable program from source code or get it from rele
 
 ### Download Executable
 
-- Linux
-- Windows
+- [Linux](https://github.com/parths09/fileshare/releases/download/1.0.0-linux/fileshare)
+- [Windows](https://github.com/parths09/fileshare/releases/download/1.0.0-windows/fileshare.exe)
 
-On linux run <code>chmod +x ~/path/fileshare</code> to give it execution permission. 
+On Linux run <code>chmod +x ~/path/fileshare</code> to give it execution permission. 
 
 
 ### Building
