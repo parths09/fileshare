@@ -1,0 +1,3 @@
+/home/parth/Projects/fileshare/src/linux/build/CMakeFiles/LocalShare.dir
+/home/parth/Projects/fileshare/src/linux/build/CMakeFiles/edit_cache.dir
+/home/parth/Projects/fileshare/src/linux/build/CMakeFiles/rebuild_cache.dir
