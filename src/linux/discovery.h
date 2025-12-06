@@ -36,10 +36,10 @@ std::vector<Peer> discover_peers(asio::io_context& io, int timeout_ms = 10000) {
     std::vector<Peer> peers;
     std::set<std::string> seen;  // Dedupe
     
+    std::cout<<"Searching peers..."<<std::endl;
     auto start = std::chrono::steady_clock::now();
     while (std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::steady_clock::now() - start).count() < timeout_ms) {
-        std::cout<<"\rDiscovering peers...";
         
         asio::ip::udp::endpoint sender_ep;
         std::array<char, 64> buf;

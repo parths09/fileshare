@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
             if(peers.empty()){
                 char y='n';
                 while(true){
-                    cout<<"No peers found.\nRetry?[y/n]"<<endl;
+                    cout<<"No peers found.\nRetry?[y/n] :";
                     cin>>y;
                     if(y!='y'&&y!='Y') break;
                     peers = discover_peers(io_context);
