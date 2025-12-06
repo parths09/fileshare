@@ -91,6 +91,10 @@ int main() {
     static std::unique_ptr<std::thread> beacon_thread;
     static asio::io_context io_context;
 
+    // popups for sent
+    bool show_success_popup = false;
+    bool show_error_popup = false;
+
     // Main loop
     // Main loop (REPLACE your entire while loop):
     while (!glfwWindowShouldClose(window)) {
@@ -128,7 +132,7 @@ int main() {
 
         // === MODE SELECTION (CENTERED) ===
         if (current_mode == AppMode::SELECT) {
-            ImGui::SetNextWindowPos({center.x - 250, center.y - 150}, ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+            ImGui::SetNextWindowPos({center.x - 350, center.y - 250}, ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
             ImGui::SetNextWindowSize({500, 300}, ImGuiCond_FirstUseEver);
             ImGui::Begin("LocalShare", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
             
@@ -193,6 +197,25 @@ int main() {
                 }
                 scanning_peers = false;
             }
+
+            // Success popup
+            if (ImGui::BeginPopupModal("Sent Success", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+                ImGui::Text("File sent successfully!");
+                ImGui::Spacing();
+                if (ImGui::Button("OK", {120, 0})) {
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
+            // Success popup
+            if (ImGui::BeginPopupModal("File Transfer failed", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+                ImGui::Text("File transfered failed!");
+                ImGui::Spacing();
+                if (ImGui::Button("OK", {120, 0})) {
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
             
             if (!peers.empty()) {
                 ImGui::BeginChild("PeersList", ImVec2(0, 200), true);
@@ -203,11 +226,27 @@ int main() {
                     ImGui::SameLine(350);
                     if (ImGui::Button(("Send##" + std::to_string(i)).c_str(), {80, 25})) {
                         std::cout << "Sending " << selected_file << " to " << p.ip << ":" << p.tcp_port << std::endl;
-                        Sender2(p.ip,std::to_string(p.tcp_port),selected_file);
+                        int success = Sender2(p.ip,std::to_string(p.tcp_port),selected_file);
+                        if(success==0){
+                            show_success_popup = true;
+                        }
+                        else{
+                            show_error_popup = true;
+                        }
                     }
                 }
                 ImGui::EndChild();
             }
+            if(show_success_popup){
+                show_success_popup=false;
+                ImGui::OpenPopup("Sent Success");
+            }
+            if(show_error_popup){
+                show_error_popup=false;
+                ImGui::OpenPopup("File Transfer failed");
+            }
+
+           
             
             if (ImGui::Button("← Back", {100, 0})) {
                 current_mode = AppMode::SELECT;
@@ -218,7 +257,7 @@ int main() {
         // === RECEIVER MODE (CENTERED) ===
         else if (current_mode == AppMode::RECEIVER) {
             ImGui::SetNextWindowPos({center.x - 300, center.y - 200}, ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
-            ImGui::SetNextWindowSize({600, 400}, ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize({700, 700}, ImGuiCond_FirstUseEver);
             ImGui::Begin("Receiver Mode", nullptr);
 
 
@@ -254,7 +293,32 @@ int main() {
             }
             if (ImGui::Button("📁 Receive", {160, 0}) && !save_directory.empty()) {
                 int success = Receiver2(save_directory);
+                if (success == 0) {
+                    ImGui::OpenPopup("Receive Success");
+                }
+                else{
+                    ImGui::OpenPopup("File Transfer failed");
+                }
             }
+            // Success popup
+            if (ImGui::BeginPopupModal("Receive Success", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+                ImGui::Text("Files received successfully!");
+                ImGui::Spacing();
+                if (ImGui::Button("OK", {120, 0})) {
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
+            // Success popup
+            if (ImGui::BeginPopupModal("File Transfer failed", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+                ImGui::Text("File transfered failed!");
+                ImGui::Spacing();
+                if (ImGui::Button("OK", {120, 0})) {
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
+
 
             
 
