@@ -34,3 +34,11 @@ std::string get_size_str(u_int64_t filesize){
         return std::to_string(filesize) + " B";
     }
 }
+
+std::string format_path(std::string filepath){
+    int l = filepath.size();
+    if(filepath[0]==39 && filepath[l-1]==39){
+        return filepath.substr(1,l-2);
+    }
+    return filepath;
+}

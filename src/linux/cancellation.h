@@ -4,5 +4,5 @@
 
 extern std::atomic<bool> cancel_requested; // Declaration
 extern std::atomic<bool> connection_accepted; // Declaration
-
+extern std::atomic<bool> receiver_active;
 void signal_handler(int signum);           // Declaration

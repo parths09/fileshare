@@ -15,8 +15,10 @@
 #pragma once
 #include "cancellation.h"
 
+std::atomic<bool> receiver_active(true);
 #define PORT 12345
 // #define BUFFER_SIZE 128 * 1024
+
 
 using asio::ip::tcp;
 
@@ -35,11 +37,12 @@ int Receiver(int argc, char *argv[])
 
     tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 12345));
     std::cout << "Server listening on port 12345...\n";
-
+    
     tcp::socket socket(io_context);
     acceptor.set_option(tcp::acceptor::reuse_address(true));
     acceptor.accept(socket);
     connection_accepted = true;
+    receiver_active=false;
 
     asio::error_code ec;
 
@@ -207,6 +210,7 @@ int Receiver2(std::string path)
     acceptor.set_option(tcp::acceptor::reuse_address(true));
     acceptor.accept(socket);
     connection_accepted = true;
+    receiver_active=false;
 
     asio::error_code ec;
 

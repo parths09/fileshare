@@ -5,8 +5,10 @@
 #include <thread>
 #include <chrono>
 #include <set>
-extern std::atomic<bool> cancel_requested;
-extern bool receiver_active;
+
+#pragma once
+#include "cancellation.h"
+
 using asio::ip::tcp;
 struct Peer {
     std::string ip, hostname;
@@ -78,7 +80,8 @@ void beacon_thread_func(uint16_t tcp_port, std::string hostname) {
         
         while (receiver_active) {  // Exit when false
             sock.send_to(asio::buffer(msg), broadcast);
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+            // std::cout<<"beacon active...\n";
         }
     } catch (const std::exception& e) {
         std::cerr << "Beacon error: " << e.what() << std::endl;
