@@ -10,7 +10,7 @@ A command-line tool written in C++ to transer files on a local network without i
 - Cancellation Support : Ctrl+C signal handling stops transfers gracefully and deletes partial files.
 - Cross-Platform : Uses standalone Asio for networking, compatible with Windows (MinGW/MSVC) and Linux.
 - Command-line Interface : Lightweight and scriptable for power users and automation setups.
-- Drag and drop file/directory in commmand line.
+- Drag and drop file/directory in command line.
 
 ## Usage
 
