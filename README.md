@@ -6,9 +6,11 @@ A command-line tool written in C++ to transer files on a local network without i
 
 ## Features
 - File Transfer : Breaks large files into chunks and transmits them reliably to a peer.
+- Peer Visibility : Sender can view receivers and select one.
 - Cancellation Support : Ctrl+C signal handling stops transfers gracefully and deletes partial files.
 - Cross-Platform : Uses standalone Asio for networking, compatible with Windows (MinGW/MSVC) and Linux.
 - Command-line Interface : Lightweight and scriptable for power users and automation setups.
+- Drag and drop file/directory in commmand line.
 
 ## Usage
 
@@ -16,6 +18,10 @@ A command-line tool written in C++ to transer files on a local network without i
 - Run the executable program with appropriate arguments:\
 <code> ./fileshare send <receiver_ip> <file_path> </code>\
 <code> ./fileshare receive <save_directory> </code>
+- Other way (for peer visibility):\
+<code> ./fileshare </code>\
+Then you can just follow the instructions.
+
 
 Note : Receiver should run the program first.
 
